@@ -1,0 +1,2 @@
+Find users who can AddMembers to a group with admin privileges:
+MATCH  p=(A:User)-[:AddMember]->(B:Group)-[:AdminTo]->(C:Computer) RETURN p 
