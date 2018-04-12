@@ -1,2 +1,9 @@
 Find users who can AddMembers to a group with admin privileges:
 MATCH  p=(A:User)-[:AddMember]->(B:Group)-[:AdminTo]->(C:Computer) RETURN p 
+
+Find Computers with Unconstrained Delegation:
+MATCH (n:Computer {UnconstrainedDelegation: True}) RETURN n
+
+Find a path from a user to a computer with Unconstrained Delegation (From @wald0):
+MATCH p = shortestPath((u:User {name:'MY USER@DOMAIN.COM'})-[r*1..]->(c:Computer {UnconstrainedDelegation:true}))
+RETURN p
