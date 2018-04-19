@@ -7,7 +7,7 @@
 ### Find a path from a user to a computer with Unconstrained Delegation (From @wald0):
     MATCH p = shortestPath((u:User {name:'MY USER@DOMAIN.COM'})-[r*1..]->(c:Computer {UnconstrainedDelegation:true})) RETURN p
 
-### Find users who are an admin on a computer:
+### Find users who are an admin on a computer (from @wald0 & @sadprocessor):
     MATCH (u1:User)-[r:AdminTo]->(c:Computer)
     RETURN u1.name, COUNT(DISTINCT(c))
     UNION ALL
@@ -15,10 +15,10 @@
     RETURN u1.name, COUNT(DISTINCT(c))
 
     MATCH 
-   (U:User)-[r:MemberOf|:AdminTo*1..]->(C:Computer)
-   WITH
-   U.name as n,
-   COUNT(DISTINCT(C)) as c 
-   RETURN 
-   {Name: n, Count: c} as SingleColumn
-   ORDER BY c DESC
+    (U:User)-[r:MemberOf|:AdminTo*1..]->(C:Computer)
+    WITH
+    U.name as n,
+    COUNT(DISTINCT(C)) as c 
+    RETURN 
+    {Name: n, Count: c} as SingleColumn
+    ORDER BY c DESC
